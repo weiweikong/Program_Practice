@@ -1,6 +1,8 @@
 #ifndef __DATECLASS__
 #define __DATECLASS__
 
+#include <vector>
+
 class Date
 {
 public:
@@ -12,15 +14,25 @@ public:
 	double set_year(int y) {year = y;}
 	double set_month(int m) {month = m;}
 	double set_day(int d) {day = d;}
+
 	friend bool operator> (const Date& left, const Date& right);
 	friend bool operator< (const Date& left, const Date& right);
 	friend bool operator== (const Date& left, const Date& right);
+	friend void FriendSwap(Date& left, Date& right);
 
 private:
     int year;
     int month;
     int day;
 };
+
+void FriendSwap(Date& left, Date& right)
+{
+	using std::swap;
+	swap(left.year, right.year);
+	swap(left.month, right.month);
+	swap(left.day, right.day);
+}
 
 bool operator== (const Date& left, const Date& right)  // Compare Date
 {

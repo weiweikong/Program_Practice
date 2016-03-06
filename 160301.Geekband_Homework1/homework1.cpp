@@ -1,7 +1,7 @@
 #include <iostream>
 #include <time.h>
 #include <stdlib.h>
-#include <vector>
+
 
 #include "Date.h"
 
@@ -58,40 +58,84 @@ void SwapDate(Date* pDate, int left, int right)
 
 }
 
-void Sort(Date pDate[], int numDate)
+void Sort(Date* pDate, int numDate)
 {
 	int i,j;
 	int flag = 1;
-	for (i = 0; (i < numDate) && flag; i++)
+	for (i = 0; (i < numDate) && flag; ++i)
 	{
 		flag = 0;
-		for (j = 0; j < numDate; j++)
+		for (j = 0; j < numDate; ++j)
 		{
-			if (pDate[j+1].get_year() < pDate[j].get_year())
+			//cout<< pDate[j+1] < pDate[j]<<"\n";
+			cout<<*pDate[j]<<"\n";
+			if (pDate[j+1] < pDate[j])
 			{
-				SwapDate(pDate, j, j+1);
+				FriendSwap(pDate[j], pDate[j+1]);
+				flag = 1;
+			}
+			/*if (pDate[j+1].get_year() < pDate[j].get_year())
+			{
+				//SwapDate(pDate, j, j+1);
+				FriendSwap(pDate[j], pDate[j+1]);
 				flag = 1;
 			}
 			else if (pDate[j+1].get_year() == pDate[j].get_year())
 			{
 				if (pDate[j+1].get_month() < pDate[j].get_month())
 				{
-					SwapDate(pDate, j, j+1);
+					//SwapDate(pDate, j, j+1);
+					FriendSwap(pDate[j], pDate[j+1]);
 					flag = 1;
 				}
 				else if (pDate[j+1].get_month() == pDate[j].get_month())
 				{
 					if (pDate[j+1].get_day() < pDate[j].get_day())
 					{
-						SwapDate(pDate, j, j+1);
+						//SwapDate(pDate, j, j+1);
+						FriendSwap(pDate[j], pDate[j+1]);
 						flag = 1;
 					}
 				}
-			}
+			}*/
 		}		
 	}
 }
 
+void CreatePointsSTD(vector<Date> &VectorDate)
+{
+	int rndYear;
+	int rndMonth;
+	int rndDay;	
+	
+	for (int i = 0; i < VectorDate.size(); ++i)
+	{		
+		rndYear = rand() % (2020-1950+1)+1950;  // Set random year [1950,2020]
+		rndMonth = rand() % (12) + 1; // Set random month [1,12]
+
+		// Set random day depond on month and year
+		if ((rndMonth==1) || (rndMonth==3) || (rndMonth==5) || (rndMonth==7) || (rndMonth==8) || (rndMonth==10) || (rndMonth==12))
+			rndDay = rand() % (31) + 1;
+		else if ((rndMonth==4) || (rndMonth==6) || (rndMonth==9) || (rndMonth==11))
+			rndDay = rand() % (30) + 1;
+		else if	(rndYear % 4 == 0)
+			rndDay = rand() % (29) + 1;
+		else
+			rndDay = rand() % (28) + 1;
+
+		VectorDate[i]=(Date(rndYear, rndMonth, rndDay));
+		//pDate[i]=Date(rndYear, rndMonth, rndDay);
+		//cout<<&pDate[i]<<"\n";  //Print Array Address
+		//print(pDate[i]);
+	}
+}
+void PrintDateSTD(std::vector<Date> &VectorDate)
+{
+	for (int i = 0; i < VectorDate.size(); ++i)
+	{
+		cout<<i<<": "<<VectorDate[i].get_year()<<"-"<<VectorDate[i].get_month()<<"-"<<VectorDate[i].get_day()<<"\n";
+	}
+}
 
 int main()
 {
@@ -103,18 +147,20 @@ int main()
 	//print(mData);
 	//print(mData2);
 
-	//cout<<(mData > mData2)<<"\n";
-	//cout<<(mData < mData2)<<"\n";
-	//cout<<(mData == mData2)<<"\n";
+	cout<<(mData > mData2)<<"\n";
+	cout<<(mData < mData2)<<"\n";
+	cout<<(mData == mData2)<<"\n";
 
 
 	int numDate = 10;
 
 	// ------------For Static Arrays ---------
-	cout<<"Using Static Array\n";
-	cout<<"Original Date Array\n";
+	cout <<"==================\n";
+	cout <<"Using Static Array\n";
+	cout <<"==================\n";	
 	Date myDate[numDate];	
 	CreatePoints(myDate, numDate);
+	cout<<"Original Date Array\n";
 	PrintDateArray(myDate, numDate);
 	cout <<"------------\n";
 	cout<<"After Sorting\n";
@@ -122,8 +168,10 @@ int main()
 	PrintDateArray(myDate, numDate);
 
 	// ----------- For Dynamic Arrays ---------
-	cout <<"------------\n";
-	cout<<"Using Dynamic Array\n";
+	cout <<"===================\n";
+	cout <<"Using Dynamic Array\n";
+	cout <<"===================\n";
+
 	Date* pDate = new Date[numDate];
 	if (pDate == nullptr)
 	{
@@ -131,6 +179,7 @@ int main()
 		return 0;
 	}
 	CreatePoints(pDate, numDate);
+	cout<<"Original Date Array\n";
 	PrintDateArray(pDate, numDate);
 	Sort(pDate, numDate);
 	cout <<"------------\n";
@@ -139,8 +188,12 @@ int main()
 	delete[] pDate;
 
 	// For std::vector Arrays
+/*	cout <<"===================\n";
+	cout <<"Using STD Vector\n";
+	cout <<"===================\n";
 	std::vector<Date> stdDateArray(numDate);
 	CreatePointsSTD(stdDateArray);
+	PrintDateSTD(stdDateArray);*/
 
 	return 0;
 }
