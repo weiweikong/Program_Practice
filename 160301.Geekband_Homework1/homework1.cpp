@@ -41,7 +41,7 @@ void CreatePoints(Date* pDate, int numDate)
 	}
 }
 
-void SwapDate(Date* pDate, int left, int right)
+/*void SwapDate(Date* pDate, int left, int right)
 {
 	int tmp;
 	tmp = pDate[left].get_year();
@@ -56,7 +56,7 @@ void SwapDate(Date* pDate, int left, int right)
 	pDate[left].set_day(pDate[right].get_day());
 	pDate[right].set_day(tmp);
 
-}
+}*/
 
 void Sort(Date* pDate, int numDate)
 {
@@ -65,14 +65,15 @@ void Sort(Date* pDate, int numDate)
 	for (i = 0; (i < numDate) && flag; ++i)
 	{
 		flag = 0;
-		for (j = 0; j < numDate; ++j)
+		for (j = 0; j < numDate-1; ++j)
 		{
-			//cout<< pDate[j+1] < pDate[j]<<"\n";
-			cout<<*pDate[j]<<"\n";
 			if (pDate[j+1] < pDate[j])
 			{
 				FriendSwap(pDate[j], pDate[j+1]);
+				//SwapDate(pDate, j, j+1);
 				flag = 1;
+				//cout<<pDate[j].get_year()<<"\n";
+				//cout<<pDate[j+1].get_year()<<"\n";
 			}
 			/*if (pDate[j+1].get_year() < pDate[j].get_year())
 			{
@@ -140,16 +141,16 @@ void PrintDateSTD(std::vector<Date> &VectorDate)
 int main()
 {
 	srand(time(NULL));  // Set random seed
-	Date mData;
-	Date mData2(2016,3,3);
+	//Date mData;
+	//Date mData2(2016,3,3);
 	//cout<<"Hellow!\n";
 	//cout<<mData.get_year()<<"\n";
 	//print(mData);
 	//print(mData2);
 
-	cout<<(mData > mData2)<<"\n";
-	cout<<(mData < mData2)<<"\n";
-	cout<<(mData == mData2)<<"\n";
+	//cout<<(mData > mData2)<<"\n";
+	//cout<<(mData < mData2)<<"\n";
+	//cout<<(mData == mData2)<<"\n";
 
 
 	int numDate = 10;
@@ -188,12 +189,12 @@ int main()
 	delete[] pDate;
 
 	// For std::vector Arrays
-/*	cout <<"===================\n";
+	cout <<"===================\n";
 	cout <<"Using STD Vector\n";
 	cout <<"===================\n";
 	std::vector<Date> stdDateArray(numDate);
 	CreatePointsSTD(stdDateArray);
-	PrintDateSTD(stdDateArray);*/
+	PrintDateSTD(stdDateArray);
 
 	return 0;
 }

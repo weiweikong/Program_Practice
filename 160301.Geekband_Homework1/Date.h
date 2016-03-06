@@ -52,12 +52,12 @@ bool operator< (const Date& left, const Date& right)  // Compare Date
 {
 	if (left.year < right.year)
 		return 1;
-	if (left.year < right.year)
+	if (left.year > right.year)
 		return 0;
 
 	if (left.month < right.month)
 		return 1;
-	if (left.month < right.month)
+	if (left.month > right.month)
 		return 0;
 
 	if (left.day < right.day)
