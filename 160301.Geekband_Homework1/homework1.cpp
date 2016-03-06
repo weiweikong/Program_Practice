@@ -1,7 +1,7 @@
 #include <iostream>
 #include <time.h>
 #include <stdlib.h>
-
+#include <omp.h>
 
 #include "Date.h"
 
@@ -69,9 +69,9 @@ void Sort(Date* pDate, int numDate)
 		{
 			if (pDate[j+1] < pDate[j])
 			{
-				FriendSwap(pDate[j], pDate[j+1]);
-				//SwapDate(pDate, j, j+1);
+				FriendSwap(pDate[j], pDate[j+1]);   // Using friend function to swap data
 				flag = 1;
+				//SwapDate(pDate, j, j+1);
 				//cout<<pDate[j].get_year()<<"\n";
 				//cout<<pDate[j+1].get_year()<<"\n";
 			}
@@ -138,6 +138,24 @@ void PrintDateSTD(std::vector<Date> &VectorDate)
 	}
 }
 
+void SortDateSTd(std::vector<Date> &VectorDate)
+{
+	int i,j;
+	int flag = 1;
+	for (i = 0; i < VectorDate.size() && flag; ++i)
+	{
+		flag = 0;
+		for (j = 0; j < VectorDate.size(); ++j)
+		{
+			if (VectorDate[j+1] < VectorDate[j])
+			{
+				FriendSwap(VectorDate[j], VectorDate[j+1]);    // Using friend function to swap data
+				flag = 1;
+			}
+		}
+	}
+}
+
 int main()
 {
 	srand(time(NULL));  // Set random seed
@@ -152,7 +170,8 @@ int main()
 	//cout<<(mData < mData2)<<"\n";
 	//cout<<(mData == mData2)<<"\n";
 
-
+	double startTime;
+	double endTime;
 	int numDate = 10;
 
 	// ------------For Static Arrays ---------
@@ -160,6 +179,7 @@ int main()
 	cout <<"Using Static Array\n";
 	cout <<"==================\n";	
 	Date myDate[numDate];	
+	startTime = omp_get_wtime();
 	CreatePoints(myDate, numDate);
 	cout<<"Original Date Array\n";
 	PrintDateArray(myDate, numDate);
@@ -167,6 +187,8 @@ int main()
 	cout<<"After Sorting\n";
 	Sort(myDate, numDate);
 	PrintDateArray(myDate, numDate);
+	endTime = omp_get_wtime();
+	cout << "Time Consuming: = "<<endTime - startTime<<"\n";
 
 	// ----------- For Dynamic Arrays ---------
 	cout <<"===================\n";
@@ -179,6 +201,7 @@ int main()
 		cout<<"Intialize Date Array Failed!\n";
 		return 0;
 	}
+	startTime = omp_get_wtime();
 	CreatePoints(pDate, numDate);
 	cout<<"Original Date Array\n";
 	PrintDateArray(pDate, numDate);
@@ -186,6 +209,8 @@ int main()
 	cout <<"------------\n";
 	cout<<"After Sorting\n";
 	PrintDateArray(pDate, numDate);
+	endTime = omp_get_wtime();
+	cout << "Time Consuming: = "<<endTime - startTime<<"\n";
 	delete[] pDate;
 
 	// For std::vector Arrays
@@ -193,8 +218,16 @@ int main()
 	cout <<"Using STD Vector\n";
 	cout <<"===================\n";
 	std::vector<Date> stdDateArray(numDate);
+	startTime = omp_get_wtime();
 	CreatePointsSTD(stdDateArray);
 	PrintDateSTD(stdDateArray);
+	SortDateSTd(stdDateArray);
+	cout <<"------------\n";
+	cout<<"After Sorting\n";
+	PrintDateSTD(stdDateArray);
+	endTime = omp_get_wtime();
+	cout << "Time Consuming: = "<<endTime - startTime<<"\n";
 
 	return 0;
+
 }
