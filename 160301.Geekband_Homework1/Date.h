@@ -9,7 +9,9 @@ public:
 	double get_year() const {return year;}
 	double get_month() const {return month;}
 	double get_day() const {return day;}
-	
+	double set_year(int y) {year = y;}
+	double set_month(int m) {month = m;}
+	double set_day(int d) {day = d;}
 	friend bool operator> (const Date& left, const Date& right);
 	friend bool operator< (const Date& left, const Date& right);
 	friend bool operator== (const Date& left, const Date& right);
