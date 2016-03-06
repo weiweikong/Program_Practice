@@ -191,4 +191,4 @@ http://www.cppblog.com/sailing/articles/161659.html 相互关系
 ##### 6. Compile
 ```
 g++ -o homework1 homework1.cpp -std=c++11 -lgomp
-``
+```
