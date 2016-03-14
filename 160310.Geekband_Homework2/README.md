@@ -17,7 +17,7 @@ class Rectangle: public Shape
 {
    int width;
    int height;
-   Point * leftDateUp;
+   Point * leftUp;
 public:
    Rectangle(int width, int height, int x, int y);
    Rectangle(const Rectangle& other);
@@ -32,5 +32,5 @@ public:
 
 ##### 6. Compile
 ```
-g++ -o homework1 homework1.cpp -std=c++11 -lgomp
+g++ Rectangle.cpp homework2.cpp -o homework2 -std=c++11 -lgomp
 ```

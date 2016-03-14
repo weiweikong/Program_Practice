@@ -5,7 +5,25 @@
 
 class Shape
 {                   
-   int no;
+   int no_;
+public:
+	static int count;
+	Shape() {no_ = ++count;}
+	Shape(const Shape& other)
+	{
+		no_ = other.no_;
+		++count;
+	}
+	Shape& operator=(const Shape& other)
+	{
+		if (this == &other)
+			return *this;
+		
+		no_ = other.no_;
+		return *this;
+	}
+	~Shape() {--count;}
+	int get_no() const {return this->no_;}
 };              
 
 class Point
@@ -18,8 +36,8 @@ public:
 		this->x_ = x;
 		this->y_ = y;
 	}
-	int get_x() const {return x_;}
-	int get_y() const {return y_;}
+	int get_x() const {return this->x_;}
+	int get_y() const {return this->y_;}
 };              
 
 class Rectangle: public Shape
@@ -37,7 +55,7 @@ public:
 
    int get_width() const {return width_;}
    int get_height() const {return height_;}
-   void Check() const;
+   void Info() const;
      
 };
 
