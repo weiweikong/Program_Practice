@@ -202,3 +202,8 @@ https://isocpp.org/wiki/faq/inline-functions#inline-member-fns
 ```
 g++ Rectangle.cpp homework2.cpp -o homework2 -std=c++11 -lgomp
 ```
+
+### Notes
+- http://www.jianshu.com/p/2fcaa850521f
+- Anoterh link: http://www.cnblogs.com/kongww/p/5278140.html
+
