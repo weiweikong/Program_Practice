@@ -6,9 +6,9 @@ using namespace std;
 
 Rectangle::Rectangle(int width, int height, int x, int y)
 {
-     this->width_ = width;
-     this->height_ = height;
-     this->leftUp_ = new Point(x, y);
+	this->width_ = width;
+    this->height_ = height;
+    this->leftUp_ = new Point(x, y);
 }
 
 Rectangle::~Rectangle()
@@ -30,7 +30,7 @@ Rectangle::Rectangle(const Rectangle& other):
 		// this->leftUp_ = new Point((other.leftUp_)->get_x(),(other.leftUp_)->get_y()); Not good, copy constructor is better
 	
 		//cout<<"Debug other.leftUp_"<<endl;
-		//cout<<(other.leftUp_)<<endl;
+		//cout<<(ohter.leftUp_)<<endl;
 		//cout<<(other.leftUp_)->get_x()<<endl;
 		//cout<<(other.leftUp_)->get_y()<<endl;
 		// cout<<*(other.leftUp_)<<endl; Wrong
