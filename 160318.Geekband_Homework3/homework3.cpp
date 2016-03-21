@@ -1,7 +1,7 @@
 #include <iostream>
 #include <time.h>
 #include <stdlib.h>
-#include <omp.h>
+//#include <omp.h>
 
 #include "Rectangle.h"
 
@@ -53,7 +53,7 @@ Shape** filterArray(Shape* m_array[], int count, int& fcount)
 	{
 		if (m_array[i]->getArea() >= 50)
 		{
-			f_array[fcount] = m_array[i];
+			f_array[fcount] = m_array[i]->copy();
 			//cout<<"i = "<<i<<" fcount="<<fcount<<endl;
 			fcount++;
 		}
@@ -64,9 +64,7 @@ Shape** filterArray(Shape* m_array[], int count, int& fcount)
 
 int main()
 {
-	srand(time(NULL));  // Set random seed
-
-	cout<<"Hello!\n";
+	srand((unsigned)time(0));	
 	
 	int count = 20;
 	int fcount;
@@ -76,8 +74,9 @@ int main()
 	fcount = 0;
 	Shape** farray = filterArray(array, count, fcount);
  	printArray(farray, fcount);
-	delArray(array, count);
+ 	delArray(array, count);	 	
 	delArray(farray, fcount);
+
 	
 	return 0;
 

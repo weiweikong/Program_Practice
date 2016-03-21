@@ -14,17 +14,10 @@ class Shape
     static int count;
 public:
 	Shape() {no_ = ++count;}
-	int getNo() const {return no_;}
-	Shape& operator=(const Shape& other)
-	{
-		if (this == &other)
-			return *this;
-		
-		no_ = other.no_;
-		return *this;
-	}
+	int getNo() const {return no_;}	
     virtual int getArea() const = 0;
-    virtual void info() const = 0;    
+    virtual void info() const = 0;
+    virtual Shape* copy() = 0;
     virtual ~Shape() {--count;}
 };
 
@@ -50,8 +43,9 @@ public:
 	virtual int getArea() const {return width_*height_;} // Rectangle Circle Area
 	virtual void info() const
 	{
-		cout<<"Rectangle No. "<<setw(2)<<setfill('0')<<this->getNo()<<" Position ("<<this->leftUp_.getX()<<", "<<this->leftUp_.getY()<<")"<<" Area :"<<this->getArea()<<endl;
+		cout<<"Rectangle No. "<<setw(2)<<setfill('0')<<this->getNo()<<" Position ("<<this->leftUp_.getX()<<", "<<this->leftUp_.getY()<<")"<<" Area: "<<this->getArea()<<endl;
 	}
+	virtual Shape* copy() { return new Rectangle(*this); }
 	virtual ~Rectangle() {};
 };
 
@@ -66,8 +60,9 @@ public:
 	virtual int getArea() const {return PI*radius_*radius_;}   // Calculate Circle Area
 	virtual void info() const
 	{
-		cout<<"Circle No. "<<this->getNo()<<" Position ("<<this->center_.getX()<<", "<<this->center_.getY()<<")"<<" Area:"<<this->getArea()<<endl;
+		cout<<"Circle No. "<<this->getNo()<<" Position ("<<this->center_.getX()<<", "<<this->center_.getY()<<")"<<" Area: "<<this->getArea()<<endl;
 	}
+	virtual Shape* copy() { return new Circle(*this); }
 	virtual ~Circle() {};
 
 };
