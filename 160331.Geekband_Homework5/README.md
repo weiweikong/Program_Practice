@@ -75,10 +75,19 @@ void Apple::operator delete[](void* ptr, size_t size)
 ### 2.3 C++ Primer - P823
 
 
+![](http://7xlos6.com1.z0.glb.clouddn.com/16-4-1/45209878.jpg)
 
 
+## 3. 编译
 
-## 编译
 ```
 g++ homework5.cpp -o homework5 -std=c++11
 ```
+
+## 4. 结果分析
+
+
+![](http://7xlos6.com1.z0.glb.clouddn.com/16-4-1/79550193.jpg)
+
+![](http://7xlos6.com1.z0.glb.clouddn.com/16-4-1/40923913.jpg)
+
