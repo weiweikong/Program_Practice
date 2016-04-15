@@ -34,7 +34,7 @@ public:
     virtual void g_B() { cout << "B::g_B()" << endl; }
     virtual void h_B() { cout << "B::h_B()" << endl; }
 };
- 
+
 class C : public B{
 public:
     long iC;
