@@ -66,7 +66,8 @@ int main(int argc, char** argv)
     for_each(set1.begin(), set1.end(), std::mem_fun_ref(&Programmer::Print));
 
     cout << "-------- Change Bill Gates to David Vandevoorde -------------" << endl;    
-    std::set<Programmer>::iterator it = find_if(set1.begin(), set1.end(), findById(3));
+    //std::set<Programmer>::iterator it = find_if(set1.begin(), set1.end(), findById(3));
+    std::set<Programmer>::iterator it = find_if(set1.begin(), set1.end(), [](const Programmer& p){return p.Id == 3;});
     set1.erase(it);
     set1.insert(Programmer(3, L"David Vandervoorde"));
     for_each(set1.begin(), set1.end(), std::mem_fun_ref(&Programmer::Print));
