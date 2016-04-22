@@ -8,7 +8,9 @@
 using namespace std;
 
 template <typename T>
-struct CalculatorTraits { };
+struct CalculatorTraits { 
+   typedef T ReturnType;
+};
 
 template<>
 struct CalculatorTraits<int> {
@@ -34,11 +36,35 @@ struct CalculatorTraits<double> {
    static constexpr ReturnType LIMIT = 888.888888;
 };
 
+// For Precision
 template <typename T>
-struct Calculator {
+struct GetPrecisionTraits {
+   typedef T ReturnType;
+ };
+
+template<>
+struct GetPrecisionTraits<float> {
+   typedef int ReturnType;
+   static constexpr ReturnType PRECISION = 5;
+};
+
+template<>
+struct GetPrecisionTraits<double> {
+   typedef int ReturnType;
+   static constexpr ReturnType PRECISION = 10;
+};
+
+
+template <typename T>
+class Calculator {
+public:
    typename CalculatorTraits<T>::ReturnType GetLimit() 
    {
       return CalculatorTraits<T>::LIMIT;
+   }
+   typename GetPrecisionTraits<T>::ReturnType GetPrecision()
+   {
+      return GetPrecisionTraits<T>::PRECISION;
    }
 };
 #endif

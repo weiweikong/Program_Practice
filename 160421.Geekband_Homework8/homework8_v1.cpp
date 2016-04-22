@@ -24,10 +24,10 @@ int main(int argc, char** argv)
 	cout << "max long: " << cal_long.GetLimit() << endl;
 
 	Calculator<float> cal_float;
-	cout << "max float: " << setprecision(5) << cal_float.GetLimit() << endl;
+	cout << "max float: " << setprecision(cal_float.GetPrecision()) << cal_float.GetLimit() << endl;
 
     Calculator<double> cal_double;
-	cout << "max double: " << setprecision(10) << cal_double.GetLimit() << endl;
+	cout << "max double: " << setprecision(cal_double.GetPrecision()) << cal_double.GetLimit() << endl;
 
 	//Calculator<char>* cal_char = new Calculator<char>;
 	//cout << "char specialized: " << boolalpha << cal_char->is_specialized << endl;
