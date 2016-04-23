@@ -7,6 +7,7 @@
 
 using namespace std;
 
+// For Calculator Traits
 template <typename T>
 struct CalculatorTraits { 
    typedef T ReturnType;
@@ -36,7 +37,7 @@ struct CalculatorTraits<double> {
    static constexpr ReturnType LIMIT = 888.888888;
 };
 
-// For Precision
+// For Precision Traits
 template <typename T>
 struct GetPrecisionTraits {
    typedef T ReturnType;
